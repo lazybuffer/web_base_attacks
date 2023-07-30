@@ -1,38 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xss</title>
-</head>
+cross-site-scripting ( xss )
 
-<body>
-    <!-- <center> -->
-        <div style="width: 500px; height: auto; color: #000000; ">
-            <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">cross-site-scripting</h1>
-            <br>
-            <p style="text-align:justify; letter-spacing: 0.9px; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
-                This type of vulnerability is the GodFather of attacks against other users.
-                It is by some measure the most prevalent web application vulnerability found in the wild.
-                It afflicts the vast majority of live applications, including some of the most
-                security-critical applications on the internet, such as those used by online banks.
-            </p>
-            <br>
-            <h3 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">Types of XSS</h3>
-            <ul>
-                <li>
-                    <p>Reflected XSS</p>
-                </li>
-                <li>
-                    <p>Stored XSS</p>
-                </li>
-                <li>
-                    <p>DOM XSS</p>
-                </li>
-            </ul>
-        </div>
-    <!-- </center> -->
-</body>
+This type of vulnerability is the GodFather of attacks against other users. 
+It is by some measure the most prevalent web application vulnerability found in the wild. 
+It afflicts the vast majority of live applications, including some of the most security-critical applications on the internet, 
+such as those used by online banks.
 
-</html>
+Types of XSS:
+
+   1. Reflected XSS
+
+   2. Stored XSS
+
+   3. DOM XSS
+
+
+1. Reflected XSS:
+
+    A very common example of XSS occurs when an application employs a dynamic page to diplay error messages
+    to users. Typically, the page takes a parameter containing the message's text and simply renders this text 
+    back to the user within it response. This type of mechanism is convenient for developers, because it allows
+    them to invoke a customized error page from anywhere in the application without needing to hard-code 
+    individual messages within the error page itself.
+
+    For example: http://h4ck3bhi.org/error/page/message.php?message=sorry%2c+an+error+occurred
+        
+        The html page show like.
+        <p>sorry, an error occurred</p>
+
+     This type of behavior of taking use-supplied input and inserting it into the HTML of the
+     server's response is one of the signatures of reflected XSS vulnerabilities, and if no filltering
+     or sanitization is being peformed, the application is certainly vulnerable.
+
+     The following URL has been crafted to replace the error message with a piece of JavaScript that generates a pop-u dialog:
+
+         For example: http://h4ck3bhi.org/error/page/message.php?message=<script>alert(1);</script>
+
+    Requesting this URL generates an HTML page that contains the following in place of original message:
+         <p><script>alert(1);</script></p>
+
+    Sure enough, when the page is rendering within the user's browser, the pop-up message appears
+    with the alert dialog-box as taking in above.
+
+    Performing this simple test serves verifies two important things. First, the content of the message parameter
+    can be replaced with arbitrary data that gets returned to browser. Second, whatever processing the server-side
+    application is performing on this data ( if any ), it is insufficient to prevent us from suppling JavaScript 
+    code that is executed when the page is dislayed in the browser.
+    
+2. Stored XSS:
+
+     

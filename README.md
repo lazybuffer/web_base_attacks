@@ -1,4 +1,4 @@
-# web_base_attacks
+# web_base_attacks ( cross-site-scripting )
 
 # Reflected XSS
 # Stored XSS

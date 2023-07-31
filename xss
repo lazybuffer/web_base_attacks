@@ -12,7 +12,7 @@ Types of XSS:
 
    2. Stored XSS
 
-   3. DOM XSS
+   3. DOM-Based XSS
 
 
 1. Reflected XSS:
@@ -49,4 +49,25 @@ Types of XSS:
     
 2. Stored XSS:
 
-     
+     A different category of XSS vulnerability is often called stored cross-site-scripting.
+     This version aries when data submitted by one user is stored in the application ( typically in a backend database )
+     and then is displayed to other user without being filttered or sanitiezed appropriately.
+     Stored XSS vulnerabilities are common in applications that support interacton between end users, or where administrative
+     staff access user records and data within the same applicaton. For example, consider an aucton application that allows
+     buyers to post questions about specific items and sellers to post responeses. If a user post question containing 
+     ambedded JavaScript, and that application does't filtter or sanitize this, an attacker can post a crafted question that
+     causes arbitrary scripts to execute within the browser of anyone who views the question, including both the seller and other
+     potencial buyers.
+                     Attacks against stored XSS vulnerabilities typically involve at least two requests to the application.
+     In the first, the attacker posts some crafted data containing malicious code that the application stores. In the second, 
+     a victim views a page cintaining the attacker's data, and the malicious code is executed when the script is executed
+     in the victim's browser. For this reason, the vulnerability is alson sometimes called second-order cross-site-scripting.
+
+3. DOM-Based XSS:
+
+     Both reflected and stored XSS vulneabilities involve a specific pattern of behavior, in which the application takes
+     user-controllable data and displays this back to users in an unsafe way. A third category of XSS vulnerabilities
+     does not share this characteristic. Here, the process by which the attacker's JavaScript gets executed is as follows:
+              a ) A user requests a crafted URL supplied by the attacker and containing embedded JavaScript.
+              b ) The server's response does not contain the attcaker's script in any form.
+              c ) When the user's browser processes this response, the script is sxecuted nonetheless.

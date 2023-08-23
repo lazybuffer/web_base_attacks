@@ -6,7 +6,7 @@
 - Stored XSS
 - DOM-base XSS
 
-### web_base_attacks ( sqlinjection )
+### web_base_attacks ( sql-injection )
 - union-base sqli
 - blind-base sqli
 - error-base sqli
